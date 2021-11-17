@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { UserCard } from './components/UserCard';
 
-function App() {
+import './App.scss';
+
+const App = () => {
+  const [randomUsers, setRandomUsers] = useState([]);
+
+  useEffect(() => {
+    const randomUserURL = 'https://randomuser.me/api//?results=15';
+
+    fetch(randomUserURL)
+      .then((response) => response.json())
+      .then((response) => setRandomUsers(response.results));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserCard randomUsers={randomUsers} />
     </div>
   );
-}
+};
 
 export default App;
