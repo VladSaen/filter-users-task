@@ -1,8 +1,8 @@
 export const UserCard = ({ randomUsers }) => {
   return (
-    <main className="main">
+    <>
       {randomUsers.map((user) => (
-        <div className="card" key={user.id}>
+        <div className="card" key={user.email}>
           <img src={user.picture.large} alt={user.name.first} />
 
           <b className="card__name">
@@ -15,7 +15,7 @@ export const UserCard = ({ randomUsers }) => {
           {user.nat}
         </div>
       ))}
-      {console.log(randomUsers)}
-    </main>
+      {console.log('UserCard render', randomUsers)}
+    </>
   );
 };
