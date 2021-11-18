@@ -1,3 +1,5 @@
+- [DEMO LINK](https://vladsaen.github.io/filter-users-task/)
+
  Сделать вывод и фильтрацию пользователей используя https://randomuser.me/api/ API.
  Requirements:
 - подзадачи разбивайте на оттельные коммиты;
