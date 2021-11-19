@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { UserCard } from './components/UserCard';
-
 import './App.scss';
 import { FilterForm } from './components/FilterForm';
 import { ExtraButtons } from './components/ExtraButtons';
