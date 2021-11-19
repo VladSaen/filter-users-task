@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     if (!randomUsers.length || loadNewUsers) {
-      const randomUserURL = `https://randomuser.me/api//?results=${numberOfUsers}`;
+      const randomUserURL = `https://randomuser.me/api/?results=${numberOfUsers}&inc=gender,email,dob,name,picture,nat`;
 
       fetch(randomUserURL)
         .then((response) => response.json())

@@ -13,7 +13,8 @@ export const UserCard = ({ randomUsers }) => {
           <a className="card__email" href={`mailto:${user.email}`}>
             {user.email}
           </a>
-          <a href={`tel:+${user.phone}`}>{user.phone}</a>
+          {user.dob.date.substr(0, 10)}
+          <br />
           {user.nat}
         </div>
       ))}
