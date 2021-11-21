@@ -1,29 +1,96 @@
-.header {
-  padding: 10px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-end;
-  height: 100px;
-  border-bottom: 1px solid grey;
+body {
+  background-color: #80808027;
 }
 
 .main {
-  margin: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
+  display: flex;
+
+  &__left-bar {
+    width: 200px;
+    margin-right: 50px;
+    padding: 20px 0 0 20px;
+  }
+
+  &__users {
+    width: 80vw;
+    padding: 20px;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+.footer {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.button {
+  margin: 2px;
+  border-radius: 5px;
+  border: 2px solid #868585;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #fff;
+    border: 2px solid #1d5dd4;
+  }
 }
 
 .filter-form {
   padding: 5px;
+  width: 160px;
   display: flex;
-  align-items: flex-end;
-  border: 1px solid grey;
+  flex-direction: column;
+
+  &__categorie-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
 
   &__label {
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__select {
+    border-radius: 10px;
+    transition: 0.3s;
+    border-width: 2px;
+
+    &:hover {
+      border-color: #1d5dd4;
+    }
+
+    & > * {
+      margin-top: 2px;
+      padding: 0 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.212);
+      }
+    }
+  }
+
+  &__fromTo {
+    height: 30px;
+    width: 50px;
+    margin: 5px;
+    font-size: 20px;
+    padding-left: 5px;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus {
+      border-color: #1d5dd4;
+    }
   }
 }
 
@@ -40,20 +107,93 @@
 
 .card {
   width: 200px;
-  padding: 10px;
+  height: 220px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #acacac;
-  border-radius: 2px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 4px 4px rgba(34, 60, 80, 0.2);
+  overflow: hidden;
+  transition: 0.3s;
+
+  &:hover {
+    margin-bottom: -100px;
+    height: 300px;
+    transform: scale(1.2);
+    z-index: 1;
+  }
+
+  &__user-photo {
+    width: 200px;
+    height: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 5px;
+  }
 
   &__name {
     text-align: center;
   }
 
   &__email {
-    width: 100%;
+    text-decoration: none;
+    color: #000;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &::before {
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
+      transform: translateY(5px);
+      content: '';
+      background-image: url('./img/email-icon.png');
+      background-size: contain;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__phone {
+    text-decoration: none;
+    color: #000;
+
+    &::before {
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
+      transform: translateY(5px);
+      content: '';
+      background-image: url('./img/phone-icon.svg');
+      background-size: contain;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__dob {
+    &::before {
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
+      transform: translateY(5px);
+      content: '';
+      background-image: url('./img/dob-icon.png');
+      background-size: contain;
+    }
   }
 }

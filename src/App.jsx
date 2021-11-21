@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     if (!randomUsers.length || loadNewUsers) {
-      const randomUserURL = `https://randomuser.me/api/?results=${numberOfUsers}&inc=gender,email,dob,name,picture,nat`;
+      const randomUserURL = `https://randomuser.me/api/?results=${numberOfUsers}&inc=gender,email,dob,name,picture,nat,phone`;
 
       fetch(randomUserURL)
         .then((response) => response.json())
@@ -43,19 +43,23 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="header">
-        <FilterForm setRandomUsers={setRandomUsers} />
+      <main className="main">
+        <div className="main__left-bar">
+          <FilterForm setRandomUsers={setRandomUsers} />
+        </div>
 
+        <div className="main__users">
+          <UserCard randomUsers={randomUsers} />
+        </div>
+      </main>
+
+      <footer className="footer">
         <ExtraButtons
           numberOfUsers={numberOfUsers}
           setNumberOfUsers={setNumberOfUsers}
           setLoadNewUsers={setLoadNewUsers}
         />
-      </header>
-
-      <main className="main">
-        <UserCard randomUsers={randomUsers} />
-      </main>
+      </footer>
     </div>
   );
 };

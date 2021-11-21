@@ -10,7 +10,6 @@ export const ExtraButtons = ({
         <input
           type="number"
           id="numder-of-users"
-          max="50"
           value={numberOfUsers}
           onChange={(event) => {
             if (event.target.value >= 50) {
@@ -22,7 +21,9 @@ export const ExtraButtons = ({
         />
       </label>
 
-      <button onClick={() => setLoadNewUsers(true)}>Load new users</button>
+      <button className="button" onClick={() => setLoadNewUsers(true)}>
+        Load new users
+      </button>
     </div>
   );
 };

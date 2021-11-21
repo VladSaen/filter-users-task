@@ -4,6 +4,8 @@ import { getPeopleFromLocalStorage } from '../App';
 export const FilterForm = ({ setRandomUsers }) => {
   const [filterByGender, setFilterByGender] = useState('all');
   const [filterByNationality, setFilterByNationality] = useState([]);
+  const [filterByAgeFrom, setFilterByAgeFrom] = useState(18);
+  const [filterByAgeTo, setFilterByAgeTo] = useState(90);
 
   const handleAddFilterByNationality = (value) => {
     if (!filterByNationality.find((nat) => nat === value)) {
@@ -18,18 +20,30 @@ export const FilterForm = ({ setRandomUsers }) => {
     }
   };
 
-  const filterUsers = (gender, nationality) => {
+  const filterUsers = (gender, nationality, from, to) => {
     setFilterByGender('all');
     setFilterByNationality([]);
 
-    if (gender === 'all' && !nationality.length) {
+    if (
+      gender === 'all' &&
+      nationality.length === 0 &&
+      +from === 18 &&
+      +to === 90
+    ) {
       setRandomUsers(getPeopleFromLocalStorage());
 
       return;
     }
 
-    const storage = getPeopleFromLocalStorage();
+    const storage = getPeopleFromLocalStorage().filter(
+      (user) => user.dob.age > +from && user.dob.age < +to
+    );
     const result = [];
+
+    if (+from !== 18 || +to !== 90) {
+      setRandomUsers(storage);
+      localStorage.setItem('filteredPeople', JSON.stringify(storage));
+    }
 
     if (gender !== 'all' && nationality.length) {
       const genderUsers = storage.filter((user) => user.gender === gender);
@@ -68,13 +82,16 @@ export const FilterForm = ({ setRandomUsers }) => {
 
   return (
     <form className="filter-form" onSubmit={(event) => event.preventDefault()}>
+      <b className="filter-form__categorie-title">Categories</b>
+
       <label className="filter-form__label" htmlFor="filterByGender">
-        gender
+        <b>Gender</b>
         <select
           value={filterByGender}
           onChange={(event) => setFilterByGender(event.target.value)}
           name="gender"
           id="filterByGender"
+          className="filter-form__select"
         >
           <option value="all">All</option>
           <option value="male">Male</option>
@@ -83,13 +100,15 @@ export const FilterForm = ({ setRandomUsers }) => {
       </label>
 
       <label className="filter-form__label" htmlFor="filterByNationality">
-        nationality
+        <b>Nationality</b>
         <select
           multiple
+          size="5"
           value={filterByNationality}
           onChange={(event) => handleAddFilterByNationality(event.target.value)}
           name="nationality"
           id="filterByNationality"
+          className="filter-form__select"
         >
           <option value="AU">AU</option>
           <option value="BR">BR</option>
@@ -109,17 +128,76 @@ export const FilterForm = ({ setRandomUsers }) => {
           <option value="TR">TR</option>
           <option value="US">US</option>
         </select>
+        <button className="button" onClick={() => setFilterByNationality([])}>
+          Clear nationality filter
+        </button>
       </label>
 
-      <button onClick={() => filterUsers(filterByGender, filterByNationality)}>
+      <label className="filter-form__label" htmlFor="filterByAge">
+        <b>Age</b>
+        <div className="from-to">
+          <input
+            className="filter-form__fromTo"
+            value={filterByAgeFrom}
+            type="number"
+            name="age-from"
+            id="filterByAge"
+            onChange={(event) => {
+              if (event.target.value >= 0) {
+                setFilterByAgeFrom(event.target.value);
+              }
+
+              if (event.target.value >= filterByAgeTo) {
+                setFilterByAgeFrom(filterByAgeTo - 1);
+              }
+            }}
+          />
+          —
+          <input
+            className="filter-form__fromTo"
+            value={filterByAgeTo}
+            type="number"
+            name="age-to"
+            id="filterByAge"
+            onChange={(event) => {
+              if (event.target.value >= 0) {
+                setFilterByAgeTo(event.target.value);
+              }
+
+              if (event.target.value <= filterByAgeFrom) {
+                setFilterByAgeTo(+filterByAgeFrom + 1);
+              }
+
+              if (event.target.value >= 90) {
+                setFilterByAgeTo(90);
+              }
+            }}
+          />
+        </div>
+      </label>
+
+      <button
+        className="button"
+        onClick={() =>
+          filterUsers(
+            filterByGender,
+            filterByNationality,
+            filterByAgeFrom,
+            filterByAgeTo
+          )
+        }
+      >
         Apply filters
       </button>
 
       <button
+        className="button"
         onClick={() => {
           const storage = getPeopleFromLocalStorage();
           setRandomUsers(storage);
           localStorage.setItem('filteredPeople', JSON.stringify(storage));
+          setFilterByGender('all');
+          setFilterByNationality([]);
         }}
       >
         Clear filter

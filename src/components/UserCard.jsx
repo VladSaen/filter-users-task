@@ -3,19 +3,28 @@ export const UserCard = ({ randomUsers }) => {
     <>
       {randomUsers.map((user) => (
         <div className="card" key={user.email}>
-          <img src={user.picture.large} alt={user.name.first} />
+          <img
+            className="card__user-photo"
+            src={user.picture.large}
+            alt={user.name.first}
+          />
 
-          <b className="card__name">
-            {`${user.name.first} ${user.name.last}`}
-          </b>
+          <div className="card__user-info">
+            <b className="card__name">
+              {`${user.name.first} ${user.name.last}`}
+            </b>
 
-          {`Gender: ${user.gender}`}
-          <a className="card__email" href={`mailto:${user.email}`}>
-            {user.email}
-          </a>
-          {user.dob.date.substr(0, 10)}
-          <br />
-          {user.nat}
+            <a className="card__email" href={`mailto:${user.email}`}>
+              {user.email}
+            </a>
+
+            <a className="card__phone" href={`tel:+${user.phone}`}>
+              {user.phone}
+            </a>
+            <div className="card__dob">
+              {`${user.dob.date.substr(0, 10)}, (${user.dob.age} y.o.)`}
+            </div>
+          </div>
         </div>
       ))}
     </>
