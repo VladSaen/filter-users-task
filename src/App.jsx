@@ -1,65 +1,50 @@
-import { useEffect, useState } from 'react';
-import { UserCard } from './components/UserCard';
 import './App.scss';
-import { FilterForm } from './components/FilterForm';
-import { ExtraButtons } from './components/ExtraButtons';
-
-export function getPeopleFromLocalStorage() {
-  return JSON.parse(localStorage.getItem('randomPeople'));
-}
-
-function getFilteredPeopleFromLocalStorage() {
-  return JSON.parse(localStorage.getItem('filteredPeople'));
-}
+import { Link, NavLink, Routes, Route } from 'react-router-dom';
+import { FindNewFriend } from './components/FindNewFriend';
+import { MyFriends } from './components/MyFriends';
+import { HomePage } from './components/HomePage';
 
 const App = () => {
-  const [loadNewUsers, setLoadNewUsers] = useState(false);
-  const [numberOfUsers, setNumberOfUsers] = useState(15);
-  const [randomUsers, setRandomUsers] = useState(
-    getFilteredPeopleFromLocalStorage() || getPeopleFromLocalStorage() || []
-  );
-
-  useEffect(() => {
-    if (!randomUsers.length || loadNewUsers) {
-      const randomUserURL = `https://randomuser.me/api/?results=${numberOfUsers}&inc=gender,email,dob,name,picture,nat,phone`;
-
-      fetch(randomUserURL)
-        .then((response) => response.json())
-        .then((response) => {
-          setRandomUsers(response.results);
-          localStorage.setItem(
-            'randomPeople',
-            JSON.stringify(response.results)
-          );
-          localStorage.setItem(
-            'filteredPeople',
-            JSON.stringify(response.results)
-          );
-        });
-
-      setLoadNewUsers(false);
-    }
-  }, [loadNewUsers]);
-
   return (
     <div className="App">
-      <main className="main">
-        <div className="main__left-bar">
-          <FilterForm setRandomUsers={setRandomUsers} />
+      <header className="header">
+        <div className="header__logo-title">
+          <Link to="/" className="logo"></Link>
+          <h1 className="header__title">friendbook</h1>
         </div>
+        <nav className="nav">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              'nav__button' + (isActive ? ' nav__button--active' : '')
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/mf"
+            className={({ isActive }) =>
+              'nav__button' + (isActive ? ' nav__button--active' : '')
+            }
+          >
+            My friends
+          </NavLink>
+          <NavLink
+            to="/fnf"
+            className={({ isActive }) =>
+              'nav__button' + (isActive ? ' nav__button--active' : '')
+            }
+          >
+            Find new friend
+          </NavLink>
+        </nav>
+      </header>
 
-        <div className="main__users">
-          <UserCard randomUsers={randomUsers} />
-        </div>
-      </main>
-
-      <footer className="footer">
-        <ExtraButtons
-          numberOfUsers={numberOfUsers}
-          setNumberOfUsers={setNumberOfUsers}
-          setLoadNewUsers={setLoadNewUsers}
-        />
-      </footer>
+      <Routes>
+        <Route path="/fnf" element={<FindNewFriend />} />
+        <Route path="/mf" element={<MyFriends />} />
+        <Route path="/" element={<HomePage />} />
+      </Routes>
     </div>
   );
 };

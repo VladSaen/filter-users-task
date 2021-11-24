@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getPeopleFromLocalStorage } from '../App';
+import { getPeopleFromLocalStorage } from './FindNewFriend';
 
 export const FilterForm = ({ setRandomUsers }) => {
   const [filterByGender, setFilterByGender] = useState('all');

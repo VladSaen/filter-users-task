@@ -1,0 +1,53 @@
+.filter-form {
+  padding: 5px;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+
+  &__categorie-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  &__select {
+    border-radius: 10px;
+    transition: 0.3s;
+    border-width: 2px;
+
+    &:hover {
+      border-color: #1d5dd4;
+    }
+
+    & > * {
+      margin-top: 2px;
+      padding: 0 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.212);
+      }
+    }
+  }
+
+  &__fromTo {
+    height: 30px;
+    width: 50px;
+    margin: 5px;
+    font-size: 20px;
+    padding-left: 5px;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus {
+      border-color: #1d5dd4;
+    }
+  }
+}

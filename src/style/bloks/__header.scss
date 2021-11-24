@@ -1,0 +1,19 @@
+.header {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: $color-blue;
+
+  &__title {
+    margin: 0;
+    font-size: 32px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  &__logo-title {
+    display: flex;
+    align-items: center;
+  }
+}
