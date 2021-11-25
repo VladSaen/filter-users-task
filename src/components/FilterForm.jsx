@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { getPeopleFromLocalStorage } from './FindNewFriend';
+import { getPeopleFromLocalStorage } from '../server/getFromServer';
+import { postFilteredPeopleToLocalStorage } from '../server/postToServer';
 
 export const FilterForm = ({ setRandomUsers }) => {
   const [filterByGender, setFilterByGender] = useState('all');
@@ -42,7 +43,7 @@ export const FilterForm = ({ setRandomUsers }) => {
 
     if (+from !== 18 || +to !== 90) {
       setRandomUsers(storage);
-      localStorage.setItem('filteredPeople', JSON.stringify(storage));
+      postFilteredPeopleToLocalStorage(storage);
     }
 
     if (gender !== 'all' && nationality.length) {
@@ -57,14 +58,13 @@ export const FilterForm = ({ setRandomUsers }) => {
       }
 
       setRandomUsers(result);
-      localStorage.setItem('filteredPeople', JSON.stringify(result));
+      postFilteredPeopleToLocalStorage(result);
 
       return;
     } else if (gender !== 'all') {
       setRandomUsers(storage.filter((user) => user.gender === gender));
-      localStorage.setItem(
-        'filteredPeople',
-        JSON.stringify(storage.filter((user) => user.gender === gender))
+      postFilteredPeopleToLocalStorage(
+        storage.filter((user) => user.gender === gender)
       );
     } else if (nationality.length) {
       for (let i = 0; i < storage.length; i++) {
@@ -76,7 +76,7 @@ export const FilterForm = ({ setRandomUsers }) => {
       }
 
       setRandomUsers(result);
-      localStorage.setItem('filteredPeople', JSON.stringify(result));
+      postFilteredPeopleToLocalStorage(result);
     }
   };
 

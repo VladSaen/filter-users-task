@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
-import { ExtraButtons } from "./ExtraButtons";
-import { FilterForm } from "./FilterForm";
-import { UserCard } from "./UserCard";
-
-export function getPeopleFromLocalStorage() {
-  return JSON.parse(localStorage.getItem('randomPeople'));
-}
-
-function getFilteredPeopleFromLocalStorage() {
-  return JSON.parse(localStorage.getItem('filteredPeople'));
-}
-
+import { useEffect, useState } from 'react';
+import {
+  getFilteredPeopleFromLocalStorage,
+  getPeopleFromLocalStorage,
+} from '../server/getFromServer';
+import {
+  postFilteredPeopleToLocalStorage,
+  postPeopleToLocalStorage,
+} from '../server/postToServer';
+import { ExtraButtons } from './ExtraButtons';
+import { FilterForm } from './FilterForm';
+import { UserCard } from './UserCard';
 
 export const FindNewFriend = () => {
   const [loadNewUsers, setLoadNewUsers] = useState(false);
@@ -27,14 +26,8 @@ export const FindNewFriend = () => {
         .then((response) => response.json())
         .then((response) => {
           setRandomUsers(response.results);
-          localStorage.setItem(
-            'randomPeople',
-            JSON.stringify(response.results)
-          );
-          localStorage.setItem(
-            'filteredPeople',
-            JSON.stringify(response.results)
-          );
+          postPeopleToLocalStorage(response.results);
+          postFilteredPeopleToLocalStorage(response.results);
         });
 
       setLoadNewUsers(false);
@@ -49,7 +42,11 @@ export const FindNewFriend = () => {
         </div>
 
         <div className="main__users">
-          <UserCard randomUsers={randomUsers} />
+          <UserCard
+            users={randomUsers}
+            setUsers={setRandomUsers}
+            button={'add friend'}
+          />
         </div>
       </main>
 
@@ -62,4 +59,4 @@ export const FindNewFriend = () => {
       </footer>
     </>
   );
-}
+};

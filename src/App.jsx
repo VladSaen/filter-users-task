@@ -3,6 +3,7 @@ import { Link, NavLink, Routes, Route } from 'react-router-dom';
 import { FindNewFriend } from './components/FindNewFriend';
 import { MyFriends } from './components/MyFriends';
 import { HomePage } from './components/HomePage';
+import { Messages } from './components/Messages';
 
 const App = () => {
   return (
@@ -30,6 +31,14 @@ const App = () => {
             My friends
           </NavLink>
           <NavLink
+            to="/messages"
+            className={({ isActive }) =>
+              'nav__button' + (isActive ? ' nav__button--active' : '')
+            }
+          >
+            Messages
+          </NavLink>
+          <NavLink
             to="/fnf"
             className={({ isActive }) =>
               'nav__button' + (isActive ? ' nav__button--active' : '')
@@ -43,6 +52,7 @@ const App = () => {
       <Routes>
         <Route path="/fnf" element={<FindNewFriend />} />
         <Route path="/mf" element={<MyFriends />} />
+        <Route path="/messages" element={<Messages />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
     </div>
