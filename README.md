@@ -1,1 +1,1 @@
-- [DEMO LINK](https://vladsaen.github.io/filter-users-task/)
+- [DEMO LINK](https://vladsaen.github.io/Friendbook/)
