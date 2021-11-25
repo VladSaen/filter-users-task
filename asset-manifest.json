@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "./static/css/main.2f35e851.chunk.css",
-    "main.js": "./static/js/main.0eaeb882.chunk.js",
-    "main.js.map": "./static/js/main.0eaeb882.chunk.js.map",
+    "main.css": "./static/css/main.14c1179f.chunk.css",
+    "main.js": "./static/js/main.c1894091.chunk.js",
+    "main.js.map": "./static/js/main.c1894091.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.413a7bc8.js",
     "runtime-main.js.map": "./static/js/runtime-main.413a7bc8.js.map",
-    "static/js/2.63393ff8.chunk.js": "./static/js/2.63393ff8.chunk.js",
-    "static/js/2.63393ff8.chunk.js.map": "./static/js/2.63393ff8.chunk.js.map",
+    "static/js/2.ce53e523.chunk.js": "./static/js/2.ce53e523.chunk.js",
+    "static/js/2.ce53e523.chunk.js.map": "./static/js/2.ce53e523.chunk.js.map",
     "index.html": "./index.html",
-    "static/css/main.2f35e851.chunk.css.map": "./static/css/main.2f35e851.chunk.css.map",
-    "static/js/2.63393ff8.chunk.js.LICENSE.txt": "./static/js/2.63393ff8.chunk.js.LICENSE.txt",
+    "static/css/main.14c1179f.chunk.css.map": "./static/css/main.14c1179f.chunk.css.map",
+    "static/js/2.ce53e523.chunk.js.LICENSE.txt": "./static/js/2.ce53e523.chunk.js.LICENSE.txt",
     "static/media/App.scss": "./static/media/phone-icon.bd679575.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.413a7bc8.js",
-    "static/js/2.63393ff8.chunk.js",
-    "static/css/main.2f35e851.chunk.css",
-    "static/js/main.0eaeb882.chunk.js"
+    "static/js/2.ce53e523.chunk.js",
+    "static/css/main.14c1179f.chunk.css",
+    "static/js/main.c1894091.chunk.js"
   ]
 }
