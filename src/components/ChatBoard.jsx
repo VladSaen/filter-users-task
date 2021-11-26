@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getChat } from '../server/getFromServer';
 import { postChat } from '../server/postToServer';
 
@@ -48,26 +48,38 @@ export const ChatBoard = ({ selectedChat }) => {
     setChat(getChat());
   };
 
+  const botttom = useRef(null);
+
+  const scrollToBottom = () => {
+    botttom.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [chat])
+
   return (
     <>
       {selectedChat.hasOwnProperty('email') ? (
-        <div className="chat-area">
-          {chat
-            .filter((item) => item.uid === selectedChat.email)
-            .map((mess) => (
-              <div
-                key={mess?.email}
-                className={classNames('chat-area__text', {
-                  'chat-area__text--user': mess?.from === 'user',
-                  'chat-area__text--bot': mess?.from === 'bot',
-                })}
-              >
-                <p>{mess.text}</p>
-                <span>{mess.time}</span>
-              </div>
-            ))}
+        <div className="chat-board">
+          <div className="chat-area">
+            {chat
+              .filter((item) => item.uid === selectedChat.email)
+              .map((mess) => (
+                <div
+                  // key={mess.email}
+                  className={classNames('chat-area__text', {
+                    'chat-area__text--user': mess.from === 'user',
+                    'chat-area__text--bot': mess.from === 'bot',
+                  })}
+                >
+                  <p className="chat-area__text-mess">{mess.text}</p>
+                  <p className="chat-area__text-time">{mess.time}</p>
+                </div>
+              ))}
+          </div>
 
-          <div className="chat-area__send-message">
+          <div ref={botttom} className="chat-area__send-message">
             <input
               onKeyPress={(event) =>
                 event.key === 'Enter' &&

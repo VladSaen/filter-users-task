@@ -13,7 +13,7 @@ import { UserCard } from './UserCard';
 
 export const FindNewFriend = () => {
   const [loadNewUsers, setLoadNewUsers] = useState(false);
-  const [numberOfUsers, setNumberOfUsers] = useState(15);
+  const [numberOfUsers, setNumberOfUsers] = useState(50);
   const [randomUsers, setRandomUsers] = useState(
     getFilteredPeopleFromLocalStorage() || getPeopleFromLocalStorage() || []
   );

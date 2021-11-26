@@ -13,3 +13,11 @@ export function getMyFriends() {
 export function getChat() {
   return JSON.parse(localStorage.getItem('chat'));
 }
+
+export function getName() {
+  return JSON.parse(localStorage.getItem('name'));
+}
+
+export function getAvatar() {
+  return JSON.parse(localStorage.getItem('avatar'));
+}

@@ -33,7 +33,7 @@ export const Messages = () => {
         )}
       </div>
 
-      <ChatBoard selectedChat={selectedChat} />
+      {myFriends.length !== 0 && <ChatBoard selectedChat={selectedChat} />}
     </main>
   );
 };

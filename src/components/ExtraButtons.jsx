@@ -12,8 +12,8 @@ export const ExtraButtons = ({
           id="numder-of-users"
           value={numberOfUsers}
           onChange={(event) => {
-            if (event.target.value >= 50) {
-              setNumberOfUsers(50);
+            if (event.target.value >= 500) {
+              setNumberOfUsers(500);
             } else if (event.target.value > 0) {
               setNumberOfUsers(event.target.value);
             }
