@@ -8,6 +8,12 @@ export const HomePage = () => {
   const [avatar, setAvatar] = useState(getAvatar() || '');
   const [registePage, setRegisterPage] = useState(() => (name ? false : true));
 
+  const handleSubmit = () => {
+    setRegisterPage(false);
+    postName(name || 'Jhon Doe');
+    postAvatar(avatar || 'https://fn.zhirkiller.com/wp-content/uploads/2018/09/no-avatar.png');
+  };
+
   return (
     <main className="main">
       {registePage ? (
@@ -34,14 +40,7 @@ export const HomePage = () => {
             />
           </label>
 
-          <button
-            className="button"
-            onClick={() => {
-              setRegisterPage(false);
-              postName(name);
-              postAvatar(avatar);
-            }}
-          >
+          <button className="button" onClick={() => handleSubmit()}>
             Save
           </button>
         </form>
@@ -57,7 +56,7 @@ export const HomePage = () => {
           <h1 className="profile__name">{name}</h1>
 
           <Link to="/mf" className="button button__profile">
-            {`Friends: ${getMyFriends().length}`}
+            {`Friends: ${getMyFriends()?.length || 0}`}
           </Link>
         </div>
       )}
