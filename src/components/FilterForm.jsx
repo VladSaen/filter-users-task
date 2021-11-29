@@ -11,9 +11,7 @@ export const FilterForm = ({ setRandomUsers }) => {
   const handleAddFilterByNationality = (value) => {
     if (!filterByNationality.find((nat) => nat === value)) {
       setFilterByNationality([...filterByNationality, value]);
-    }
-
-    if (filterByNationality.find((nat) => nat === value)) {
+    } else {
       const result = filterByNationality;
       const index = result.indexOf(value);
       result.splice(index, 1);
@@ -39,7 +37,7 @@ export const FilterForm = ({ setRandomUsers }) => {
     const storage = getPeopleFromLocalStorage().filter(
       (user) => user.dob.age > +from && user.dob.age < +to
     );
-    const result = [];
+    let result;
 
     if (+from !== 18 || +to !== 90) {
       setRandomUsers(storage);
@@ -49,13 +47,7 @@ export const FilterForm = ({ setRandomUsers }) => {
     if (gender !== 'all' && nationality.length) {
       const genderUsers = storage.filter((user) => user.gender === gender);
 
-      for (let i = 0; i < genderUsers.length; i++) {
-        for (let y = 0; y < nationality.length; y++) {
-          if (genderUsers[i].nat === nationality[y]) {
-            result.push(genderUsers[i]);
-          }
-        }
-      }
+      result = genderUsers.filter((user) => nationality.includes(user.nat));
 
       setRandomUsers(result);
       postFilteredPeopleToLocalStorage(result);
@@ -67,13 +59,7 @@ export const FilterForm = ({ setRandomUsers }) => {
         storage.filter((user) => user.gender === gender)
       );
     } else if (nationality.length) {
-      for (let i = 0; i < storage.length; i++) {
-        for (let y = 0; y < nationality.length; y++) {
-          if (storage[i].nat === nationality[y]) {
-            result.push(storage[i]);
-          }
-        }
-      }
+      result = storage.filter((user) => nationality.includes(user.nat));
 
       setRandomUsers(result);
       postFilteredPeopleToLocalStorage(result);

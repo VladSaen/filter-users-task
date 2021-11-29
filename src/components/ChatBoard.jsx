@@ -15,14 +15,16 @@ export const ChatBoard = ({ selectedChat }) => {
     setMessage('');
 
     const fromUser = {
-      uid: from,
+      uid: Math.floor(Math.random() * 10000000000),
+      email: from,
       from: 'user',
       time: new Date().toLocaleTimeString(),
       text,
     };
 
     const fromBot = {
-      uid: from,
+      uid: Math.floor(Math.random() * 10000000000),
+      email: from,
       from: 'bot',
       time: new Date().toLocaleTimeString(),
       text: '',
@@ -51,12 +53,12 @@ export const ChatBoard = ({ selectedChat }) => {
   const botttom = useRef(null);
 
   const scrollToBottom = () => {
-    botttom.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    botttom.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [chat])
+    scrollToBottom();
+  }, [chat]);
 
   return (
     <>
@@ -64,10 +66,10 @@ export const ChatBoard = ({ selectedChat }) => {
         <div className="chat-board">
           <div className="chat-area">
             {chat
-              .filter((item) => item.uid === selectedChat.email)
+              .filter((item) => item.email === selectedChat.email)
               .map((mess) => (
                 <div
-                  // key={mess.email}
+                  key={mess.uid}
                   className={classNames('chat-area__text', {
                     'chat-area__text--user': mess.from === 'user',
                     'chat-area__text--bot': mess.from === 'bot',
